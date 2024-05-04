@@ -21,7 +21,7 @@ import {
   FinalityProvider,
   getFinalityProviders,
 } from "./api/getFinalityProviders";
-import { getGlobalParams } from "./api/getGlobalParams";
+import { GlobalParamsData, getGlobalParams } from "./api/getGlobalParams";
 import { Delegation, getDelegations } from "./api/getDelegations";
 import { Form } from "./components/Form/Form";
 import { apiDataToStakingScripts } from "@/utils/apiDataToStakingScripts";
@@ -52,7 +52,7 @@ const Home: React.FC<HomeProps> = () => {
   const [duration, setDuration] = useState(0);
   const [finalityProvider, setFinalityProvider] = useState<FinalityProvider>();
 
-  const { data: globalParamsData } = useQuery({
+  const { data: globalParamsVersions } = useQuery({
     queryKey: ["global params"],
     queryFn: getGlobalParams,
     refetchInterval: 60000, // 1 minute
@@ -153,11 +153,35 @@ const Home: React.FC<HomeProps> = () => {
   };
 
   const walletAndDataReady =
-    !!btcWallet && !!globalParamsData && !!finalityProvidersData;
+    !!btcWallet && !!globalParamsVersions && !!finalityProvidersData;
 
   const stakingFee = 500;
   const withdrawalFee = 500;
   const unbondingFee = 500;
+
+  const currentGlobalParams = async (): Promise<GlobalParamsData> => {
+    if (!btcWallet || !globalParamsVersions) {
+      throw new Error("Wallet is not loaded")
+    }
+    let currentBtcHeight;
+    try {
+      currentBtcHeight = await btcWallet?.btcTipHeight();
+    } catch (error: Error | any) {
+      throw new Error("Couldn't get current BTC height")
+    }
+
+    const sortedVersions = globalParamsVersions.versions.sort((a: GlobalParamsData, b: GlobalParamsData): number => {
+      return b.activation_height - a.activation_height
+    })
+
+    for (let idx in sortedVersions) {
+      if (sortedVersions[idx].activation_height > currentBtcHeight) {
+        return sortedVersions[idx];
+      }
+    }
+
+    throw new Error("no suitable version found");
+  }
 
   const handleSign = async () => {
     if (
@@ -173,6 +197,14 @@ const Home: React.FC<HomeProps> = () => {
       // duration > globalParamsData.max_staking_time ||
       // duration < globalParamsData.min_staking_time
     ) {
+      return;
+    }
+
+    let globalParamsData;
+    try {
+      globalParamsData = await currentGlobalParams()
+    } catch (error: Error | any) {
+      console.log(error);
       return;
     }
 
@@ -208,6 +240,7 @@ const Home: React.FC<HomeProps> = () => {
       console.error(error?.message || "Cannot build staking scripts");
       return;
     }
+    console.log("Here4")
 
     const timelockScript = scripts.timelockScript;
     const dataEmbedScript = scripts.dataEmbedScript;
@@ -233,7 +266,6 @@ const Home: React.FC<HomeProps> = () => {
       );
       return;
     }
-    console.log("unsignedStakingTx", unsignedStakingTx.toHex());
     let stakingTx: string;
     try {
       stakingTx = await btcWallet.signPsbt(unsignedStakingTx.toHex());
@@ -241,6 +273,7 @@ const Home: React.FC<HomeProps> = () => {
       console.error(error?.message || "Staking transaction signing error");
       return;
     }
+    console.log("Here6")
 
     let txID;
     try {
@@ -248,6 +281,7 @@ const Home: React.FC<HomeProps> = () => {
     } catch (error: Error | any) {
       console.error(error?.message || "Broadcasting staking transaction error");
     }
+    console.log("Here7")
 
     // Update the local state with the new delegation
     setDelegationsLocalStorage((delegations) => [
@@ -304,7 +338,7 @@ const Home: React.FC<HomeProps> = () => {
           <Stats data={statsData} isLoading={statsDataIsLoading} />
           {btcWallet &&
             delegationsData &&
-            globalParamsData &&
+            globalParamsVersions &&
             btcWalletNetwork &&
             publicKeyNoCoord &&
             finalityProvidersData &&

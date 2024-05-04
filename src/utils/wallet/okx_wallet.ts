@@ -6,6 +6,7 @@ import {
   getFundingUTXOs,
   getNetworkFees,
   pushTx,
+  getBtcTipHeight,
 } from "../mempool_api";
 
 type OKXWalletInfo = {
@@ -148,4 +149,8 @@ export class OKXWallet extends WalletProvider {
     // mempool call
     return await getFundingUTXOs(address, amount);
   };
+
+  btcTipHeight = async (): Promise<number> => {
+    return await getBtcTipHeight();
+  }
 }
