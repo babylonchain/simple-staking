@@ -116,6 +116,8 @@ const Home: React.FC<HomeProps> = () => {
     setAddress("");
   };
 
+  // TODO support multiple wallets
+
   const handleConnectBTC = async () => {
     // close the modal
     setConnectModalOpen(false);
