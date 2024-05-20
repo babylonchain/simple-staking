@@ -43,7 +43,7 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
       </div>
       <div className="flex flex-col justify-center gap-4">
         <div className="form-control">
-          <label className="label cursor-pointer justify-start gap-2">
+          <label className="label cursor-pointer justify-start gap-2 rounded-xl bg-base-100 p-4">
             <input
               type="checkbox"
               className="checkbox-primary checkbox"
