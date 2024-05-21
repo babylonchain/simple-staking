@@ -31,6 +31,7 @@ export const walletsListArray = Object.keys(walletsList).map((key) => {
   };
 });
 
+// window object keys
 enum WalletType {
   OKX = "okxwallet",
   Tomo = "tomo_btc",

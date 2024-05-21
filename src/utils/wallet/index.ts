@@ -9,13 +9,13 @@ const taprootAddressLength = 62;
 
 // Get the wallet provider from the window object, default to OKXWallet if not found.
 export const getWallet = (): WalletProvider => {
-  // Check for other wallets in the window object
-  for (const key in walletClasses) {
-    if (window[key as keyof typeof window]) {
-      const WalletClass = walletClasses[key];
-      return new WalletClass();
-    }
-  }
+  // // Check for other wallets in the window object
+  // for (const key in walletClasses) {
+  //   if (window[key as keyof typeof window]) {
+  //     const WalletClass = walletClasses[key];
+  //     return new WalletClass();
+  //   }
+  // }
 
   // Inject the wallet provider into the window object
   if (window.btcwallet) {

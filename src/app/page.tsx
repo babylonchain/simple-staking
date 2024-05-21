@@ -116,12 +116,17 @@ const Home: React.FC<HomeProps> = () => {
     setAddress("");
   };
 
-  const handleConnectBTC = async () => {
+  const handleConnectBTC = async (wallet?: WalletProvider) => {
     // close the modal
     setConnectModalOpen(false);
 
     try {
-      const walletProvider = getWallet();
+      let walletProvider: WalletProvider;
+      if (wallet) {
+        walletProvider = wallet;
+      } else {
+        walletProvider = getWallet();
+      }
       await walletProvider.connectWallet();
       const address = await walletProvider.getAddress();
       // check if the wallet address type is supported in babylon

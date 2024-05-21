@@ -26,6 +26,8 @@ export class TomoWallet extends WalletProvider {
     }
 
     const tomoWallet = window.tomo_btc;
+    // somehow cannot do that using ui
+    await window.tomo_btc.switchNetwork("testnet");
     await window.tomo_btc.initialize();
 
     const addresses = await tomoWallet.requestAccounts();
