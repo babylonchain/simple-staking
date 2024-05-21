@@ -64,7 +64,9 @@ export class OneKeyWallet extends WalletProvider {
       throw new Error("OneKey wallet not connected");
     }
     // sign the PSBT
-    return await this.provider?.signPsbt(psbtHex, { autoFinalized: true });
+    // TODO check issues with signing PSBTs and return types
+    // return await this.provider?.signPsbt(psbtHex, { autoFinalized: true });
+    return await this.provider?.signPsbt(psbtHex);
   };
 
   signPsbts = async (psbtsHexes: string[]): Promise<string[]> => {
