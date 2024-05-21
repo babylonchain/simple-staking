@@ -21,22 +21,17 @@ export class TomoWallet extends WalletProvider {
 
   connectWallet = async (): Promise<this> => {
     const workingVersion = "2.83.26";
-    // check whether there is an TomoWallet extension
-    if (!window.okxwallet) {
-      throw new Error("TomoWallet extension not found");
-    }
-
-    const version = await window.okxwallet.getVersion();
-    if (version < workingVersion) {
-      throw new Error("Please update TomoWallet to the latest version");
+    // check whether there is an Tomo wallet extension
+    if (!window.tomo_btc) {
+      throw new Error("Tomo wallet extension not found");
     }
 
     const okxwallet = window.okxwallet;
     try {
-      await okxwallet.enable(); // Connect to TomoWallet extension
+      await okxwallet.enable(); // Connect to Tomo wallet extension
     } catch (error) {
       if ((error as Error)?.message?.includes("rejected")) {
-        throw new Error("Connection to TomoWallet was rejected");
+        throw new Error("Connection to Tomo wallet was rejected");
       } else {
         throw new Error((error as Error)?.message);
       }
@@ -46,7 +41,7 @@ export class TomoWallet extends WalletProvider {
       // this will not throw an error even if user has no BTC Signet enabled
       result = await okxwallet?.bitcoinSignet?.connect();
     } catch (error) {
-      throw new Error("BTC Signet is not enabled in TomoWallet");
+      throw new Error("BTC Signet is not enabled in Tomo wallet");
     }
 
     const { address, compressedPublicKey } = result;
@@ -58,31 +53,31 @@ export class TomoWallet extends WalletProvider {
       };
       return this;
     } else {
-      throw new Error("Could not connect to TomoWallet");
+      throw new Error("Could not connect to Tomo wallet");
     }
   };
 
   getWalletProviderName = async (): Promise<string> => {
-    return "TomoWallet";
+    return "Tomo wallet";
   };
 
   getAddress = async (): Promise<string> => {
     if (!this.tomoWalletInfo) {
-      throw new Error("TomoWallet not connected");
+      throw new Error("Tomo wallet not connected");
     }
     return this.tomoWalletInfo.address;
   };
 
   getPublicKeyHex = async (): Promise<string> => {
     if (!this.tomoWalletInfo) {
-      throw new Error("TomoWallet not connected");
+      throw new Error("Tomo wallet not connected");
     }
     return this.tomoWalletInfo.publicKeyHex;
   };
 
   signPsbt = async (psbtHex: string): Promise<string> => {
     if (!this.tomoWalletInfo) {
-      throw new Error("TomoWallet not connected");
+      throw new Error("Tomo wallet not connected");
     }
     // sign the PSBT
     return (await this.signPsbts([psbtHex]))[0];
@@ -90,7 +85,7 @@ export class TomoWallet extends WalletProvider {
 
   signPsbts = async (psbtsHexes: string[]): Promise<string[]> => {
     if (!this.tomoWalletInfo) {
-      throw new Error("TomoWallet not connected");
+      throw new Error("Tomo wallet not connected");
     }
     // sign the PSBTs
     return await window?.okxwallet?.bitcoinSignet?.signPsbts(psbtsHexes);
@@ -98,7 +93,7 @@ export class TomoWallet extends WalletProvider {
 
   signMessageBIP322 = async (message: string): Promise<string> => {
     if (!this.tomoWalletInfo) {
-      throw new Error("TomoWallet not connected");
+      throw new Error("Tomo wallet not connected");
     }
     return await window?.okxwallet?.bitcoinSignet?.signMessage(
       message,
@@ -112,7 +107,7 @@ export class TomoWallet extends WalletProvider {
 
   on = (eventName: string, callBack: () => void) => {
     if (!this.tomoWalletInfo) {
-      throw new Error("TomoWallet not connected");
+      throw new Error("Tomo wallet not connected");
     }
     // subscribe to account change event
     if (eventName === "accountChanged") {
