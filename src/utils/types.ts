@@ -9,5 +9,6 @@ declare global {
     btcwallet: WalletProvider;
     tomo_btc: any;
     okxwallet: any;
+    $onekey: any;
   }
 }
