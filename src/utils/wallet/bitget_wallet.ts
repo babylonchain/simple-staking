@@ -7,77 +7,78 @@ import {
   pushTx,
 } from "../mempool_api";
 
-type OneKeyWalletInfo = {
+type BitgetWalletInfo = {
   publicKeyHex: string;
   address: string;
 };
 
-export class OneKeyWallet extends WalletProvider {
-  private oneKeyWalletInfo: OneKeyWalletInfo | undefined;
-  private provider = window.$onekey?.btcwallet;
+export class BitgetWallet extends WalletProvider {
+  private bitGetWalletInfo: BitgetWalletInfo | undefined;
+  private provider = window.bitkeep?.unisat;
 
   constructor() {
     super();
   }
 
   connectWallet = async (): Promise<this> => {
-    // check whether there is an OneKey wallet extension
+    // check whether there is an Bitget wallet extension
     if (!this.provider) {
-      throw new Error("OneKey wallet extension not found");
+      throw new Error("Bitget wallet extension not found");
     }
 
-    await this.provider?.connectWallet();
-    const address = await this.provider?.getAddress();
-    const compressedPublicKey = await this.provider.getPublicKeyHex();
+    const accounts = await this.provider?.requestAccounts();
+
+    const address = accounts[0];
+    const compressedPublicKey = await this.provider.getPublicKey();
 
     if (compressedPublicKey && address) {
-      this.oneKeyWalletInfo = {
+      this.bitGetWalletInfo = {
         publicKeyHex: compressedPublicKey,
         address,
       };
       return this;
     } else {
-      throw new Error("Could not connect to OneKey wallet");
+      throw new Error("Could not connect to Bitget wallet");
     }
   };
 
   getWalletProviderName = async (): Promise<string> => {
-    return "OneKey wallet";
+    return "Bitget wallet";
   };
 
   getAddress = async (): Promise<string> => {
-    if (!this.oneKeyWalletInfo) {
-      throw new Error("OneKey wallet not connected");
+    if (!this.bitGetWalletInfo) {
+      throw new Error("Bitget wallet not connected");
     }
-    return this.oneKeyWalletInfo.address;
+    return this.bitGetWalletInfo.address;
   };
 
   getPublicKeyHex = async (): Promise<string> => {
-    if (!this.oneKeyWalletInfo) {
-      throw new Error("OneKey wallet not connected");
+    if (!this.bitGetWalletInfo) {
+      throw new Error("Bitget wallet not connected");
     }
-    return this.oneKeyWalletInfo.publicKeyHex;
+    return this.bitGetWalletInfo.publicKeyHex;
   };
 
   signPsbt = async (psbtHex: string): Promise<string> => {
-    if (!this.oneKeyWalletInfo) {
-      throw new Error("OneKey wallet not connected");
+    if (!this.bitGetWalletInfo) {
+      throw new Error("Bitget wallet not connected");
     }
     // sign the PSBT
     return await this.provider?.signPsbt(psbtHex);
   };
 
   signPsbts = async (psbtsHexes: string[]): Promise<string[]> => {
-    if (!this.oneKeyWalletInfo) {
-      throw new Error("OneKey wallet not connected");
+    if (!this.bitGetWalletInfo) {
+      throw new Error("Bitget wallet not connected");
     }
     // sign the PSBTs
     return await this.provider?.signPsbts(psbtsHexes);
   };
 
   signMessageBIP322 = async (message: string): Promise<string> => {
-    if (!this.oneKeyWalletInfo) {
-      throw new Error("OneKey wallet not connected");
+    if (!this.bitGetWalletInfo) {
+      throw new Error("Bitget wallet not connected");
     }
     return await this.provider?.signMessageBIP322(message);
   };
@@ -87,8 +88,8 @@ export class OneKeyWallet extends WalletProvider {
   };
 
   on = (eventName: string, callBack: () => void) => {
-    if (!this.oneKeyWalletInfo) {
-      throw new Error("OneKey wallet not connected");
+    if (!this.bitGetWalletInfo) {
+      throw new Error("Bitget wallet not connected");
     }
     // subscribe to account change event
     if (eventName === "accountChanged") {

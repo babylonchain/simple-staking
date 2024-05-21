@@ -10,5 +10,6 @@ declare global {
     tomo_btc: any;
     okxwallet: any;
     $onekey: any;
+    bitkeep: any;
   }
 }
