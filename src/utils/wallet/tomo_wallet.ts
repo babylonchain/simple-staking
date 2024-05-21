@@ -20,31 +20,17 @@ export class TomoWallet extends WalletProvider {
   }
 
   connectWallet = async (): Promise<this> => {
-    const workingVersion = "2.83.26";
     // check whether there is an Tomo wallet extension
     if (!window.tomo_btc) {
       throw new Error("Tomo wallet extension not found");
     }
 
-    const okxwallet = window.okxwallet;
-    try {
-      await okxwallet.enable(); // Connect to Tomo wallet extension
-    } catch (error) {
-      if ((error as Error)?.message?.includes("rejected")) {
-        throw new Error("Connection to Tomo wallet was rejected");
-      } else {
-        throw new Error((error as Error)?.message);
-      }
-    }
-    let result = null;
-    try {
-      // this will not throw an error even if user has no BTC Signet enabled
-      result = await okxwallet?.bitcoinSignet?.connect();
-    } catch (error) {
-      throw new Error("BTC Signet is not enabled in Tomo wallet");
-    }
+    const tomoWallet = window.tomo_btc;
+    await window.tomo_btc.initialize();
 
-    const { address, compressedPublicKey } = result;
+    const addresses = await tomoWallet.requestAccounts();
+    const address = addresses[0];
+    const compressedPublicKey = await tomoWallet.getPublicKey();
 
     if (compressedPublicKey && address) {
       this.tomoWalletInfo = {
@@ -88,17 +74,14 @@ export class TomoWallet extends WalletProvider {
       throw new Error("Tomo wallet not connected");
     }
     // sign the PSBTs
-    return await window?.okxwallet?.bitcoinSignet?.signPsbts(psbtsHexes);
+    return await window?.tomo_btc?.signPsbts(psbtsHexes);
   };
 
   signMessageBIP322 = async (message: string): Promise<string> => {
     if (!this.tomoWalletInfo) {
       throw new Error("Tomo wallet not connected");
     }
-    return await window?.okxwallet?.bitcoinSignet?.signMessage(
-      message,
-      "bip322-simple",
-    );
+    return await window?.tomo_btc?.signMessage(message, "bip322-simple");
   };
 
   getNetwork = async (): Promise<Network> => {
@@ -111,7 +94,7 @@ export class TomoWallet extends WalletProvider {
     }
     // subscribe to account change event
     if (eventName === "accountChanged") {
-      return window.okxwallet.bitcoinSignet.on(eventName, callBack);
+      return window.tomo_btc.on(eventName, callBack);
     }
   };
 

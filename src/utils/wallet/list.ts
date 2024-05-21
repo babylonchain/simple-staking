@@ -32,8 +32,8 @@ export const walletsListArray = Object.keys(walletsList).map((key) => {
 });
 
 enum WalletType {
-  OKX = "okx",
-  Tomo = "tomo",
+  OKX = "okxwallet",
+  Tomo = "tomo_btc",
 }
 
 // Create a mapping of wallet type identifiers to their respective classes
