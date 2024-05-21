@@ -6,7 +6,8 @@ declare global {
   interface Window {
     btc: any;
     keplr: any;
-    okxwallet: any;
     btcwallet: WalletProvider;
+    tomo_btc: any;
+    okxwallet: any;
   }
 }

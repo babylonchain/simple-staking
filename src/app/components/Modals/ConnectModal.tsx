@@ -3,10 +3,14 @@ import { Modal } from "react-responsive-modal";
 import { IoMdClose } from "react-icons/io";
 import { PiWalletBold } from "react-icons/pi";
 
+import { WalletProvider } from "@/utils/wallet/wallet_provider";
+import { walletsList, walletsListArray } from "@/utils/wallet/list";
+import Image from "next/image";
+
 interface ConnectModalProps {
   open: boolean;
   onClose: (value: boolean) => void;
-  onConnect: () => void;
+  onConnect: (wallet: WalletProvider) => void;
   connectDisabled: boolean;
 }
 
@@ -17,8 +21,29 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
   connectDisabled,
 }) => {
   const modalRef = useRef(null);
-
   const [accepted, setAccepted] = useState(false);
+
+  const [selectedWallet, setSelectedWallet] = useState<
+    keyof typeof walletsList | null
+  >(null);
+
+  const handleWalletSelection = (wallet: keyof typeof walletsList) => {
+    setSelectedWallet(wallet);
+  };
+
+  const handleConnect = async () => {
+    if (selectedWallet) {
+      const WalletClass = walletsList[selectedWallet].wallet;
+      const walletInstance = new WalletClass();
+      try {
+        await walletInstance.connectWallet();
+        onConnect(walletInstance);
+      } catch (error) {
+        console.error("Failed to connect wallet", error);
+        // Handle error, maybe show a notification
+      }
+    }
+  };
 
   return (
     <Modal
@@ -64,10 +89,32 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({
             </span>
           </label>
         </div>
+        <div className="my-4 flex flex-col gap-4">
+          <h3 className="text-center font-semibold">Choose wallet</h3>
+          <div className="grid grid-cols-2 gap-4">
+            {walletsListArray.map((wallet) => (
+              <div
+                key={wallet.key}
+                className={`flex cursor-pointer items-center gap-2 rounded-xl border-2 bg-base-100 p-2 transition-all hover:text-primary ${selectedWallet === wallet.key ? "border-primary" : "border-base-100"}`}
+                onClick={() => handleWalletSelection(wallet.key)}
+              >
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border bg-white p-2">
+                  <Image
+                    src={wallet.icon}
+                    alt={wallet.name}
+                    width={32}
+                    height={32}
+                  />
+                </div>
+                <p>{wallet.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
         <button
           className="btn-primary btn h-[2.5rem] min-h-[2.5rem] rounded-lg px-2 text-white"
-          onClick={onConnect}
-          disabled={connectDisabled || !accepted}
+          onClick={handleConnect}
+          disabled={connectDisabled || !accepted || !selectedWallet}
         >
           <PiWalletBold size={20} />
           Connect to BTC signet network
