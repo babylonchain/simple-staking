@@ -68,6 +68,8 @@ export class TomoWallet extends WalletProvider {
       throw new Error("Tomo wallet not connected");
     }
     // sign the PSBT
+    return await window?.tomo_btc?.signPsbt(psbtHex);
+    // Currently not supported by Tomo wallet testnet
     return (await this.signPsbts([psbtHex]))[0];
   };
 
