@@ -264,12 +264,13 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
               are not, and do not directly or indirectly own or control, and
               have not received any assets from any blockchain address that is
               listed on any sanctions list or equivalent maintained by any of
-              the Major Jurisdictions (such sanctions-listed persons,
-              collectively, Sanctions Lists Persons); and
+              the <strong>Major Jurisdictions</strong> (such sanctions-listed
+              persons, collectively, Sanctions Lists Persons); and
             </li>
             <li>
-              do not intend to transact in or with any Restricted Territories or
-              Sanctions List Persons;
+              do not intend to transact in or with any{" "}
+              <strong>Restricted Territories</strong> or{" "}
+              <strong>Sanctions List Persons</strong>;
             </li>
           </ul>
         </div>
@@ -277,14 +278,14 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
         <div className="section">
           <h3 className="section-title">8. Permitted Use</h3>
           <p>
-            The Permitted Use of the Interface is exclusively to aid
-            technologically sophisticated persons who wish to use the Interface
-            for informational purposes only as an aid to their own research, due
-            diligence, and decision-making. Before using any information from
-            the Interface (including any draft transaction messages) to engage
-            in transactions, each User must independently verify the accuracy of
-            such information (and the consistency of such draft transaction
-            messages with the User&apos;s intentions).
+            The <strong>Permitted Use</strong> of the Interface is exclusively
+            to aid technologically sophisticated persons who wish to use the
+            Interface for informational purposes only as an aid to their own
+            research, due diligence, and decision-making. Before using any
+            information from the Interface (including any draft transaction
+            messages) to engage in transactions, each User must independently
+            verify the accuracy of such information (and the consistency of such
+            draft transaction messages with the User&apos;s intentions).
           </p>
         </div>
 
@@ -487,11 +488,11 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
           <p>
             The Interface is a free web application maintained at the sole and
             absolute discretion of a community of contributors who may also be
-            known as Interface maintainers. Individually and collectively they
-            assume no duty, liability, obligation, or undertaking to continue to
-            maintain, or to make available the Interface. The Interface
-            maintainers may terminate or change the Interface with respect to
-            any aspect of the Interface at any time.
+            known as <strong>Interface maintainers</strong>. Individually and
+            collectively they assume no duty, liability, obligation, or
+            undertaking to continue to maintain, or to make available the
+            Interface. The Interface maintainers may terminate or change the
+            Interface with respect to any aspect of the Interface at any time.
           </p>
           <p>
             The Interface maintainers have no obligation, duty, or liability to
@@ -690,19 +691,19 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
 
           <h4>15.3 Fork Handling</h4>
           <p>
-            The Protocol, and all tokens may be subject to Forks. Forks occur
-            when some or all persons running the software clients for a
-            particular blockchain system adopt a new client or a new version of
-            an existing client that: (i) changes the protocol rules in
-            backward-compatible or backward-incompatible manner that affects
-            which transactions can be added into later blocks, how later blocks
-            are added to the blockchain, or other matters relating to the future
-            operation of the protocol; or (ii) reorganizes or changes past
-            blocks to alter the history of the blockchain. Some forks are
-            &quot;contentious&quot; and thus may result in two or more
-            persistent alternative versions of the protocol or blockchain,
-            either of which may be viewed as or claimed to be the legitimate or
-            genuine continuation of the original.
+            The Protocol, and all tokens may be subject to{" "}
+            <strong>Forks</strong>. Forks occur when some or all persons running
+            the software clients for a particular blockchain system adopt a new
+            client or a new version of an existing client that: (i) changes the
+            protocol rules in backward-compatible or backward-incompatible
+            manner that affects which transactions can be added into later
+            blocks, how later blocks are added to the blockchain, or other
+            matters relating to the future operation of the protocol; or (ii)
+            reorganizes or changes past blocks to alter the history of the
+            blockchain. Some forks are &quot;contentious&quot; and thus may
+            result in two or more persistent alternative versions of the
+            protocol or blockchain, either of which may be viewed as or claimed
+            to be the legitimate or genuine continuation of the original.
           </p>
           <p>
             Interface maintainers cannot anticipate, control or influence the
