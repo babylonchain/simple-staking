@@ -71,9 +71,9 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
             These Terms of Use and any terms and conditions incorporated by
             reference (collectively, the &quot;<strong>Terms</strong>&quot;)
             govern access to and the use of the Interface by each individual,
-            entity, group, or association (collectively User, Users, You) who
-            views, interacts, links to or otherwise uses or derives any benefit
-            from the Interface.
+            entity, group, or association (collectively{" "}
+            <strong>User, Users, You</strong>) who views, interacts, links to or
+            otherwise uses or derives any benefit from the Interface.
           </p>
           <p>
             By accessing, browsing, or using the Interface or Website, or by
@@ -144,9 +144,10 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
             The Interface also offers interaction methods whereby the User can
             indicate a transaction that the User would like to perform in
             connection with the publicly available Babylon staking protocols
-            (the &quot;Protocols&quot;). The interaction methods include
-            accessing the functionalities of publicly deployed Protocol for
-            Users to self-authorize token transfers on relevant blockchains.
+            (the &quot;<strong>Protocols</strong>&quot;). The interaction
+            methods include accessing the functionalities of publicly deployed
+            Protocol for Users to self-authorize token transfers on relevant
+            blockchains.
           </p>
 
           <h4>5. About the Protocol</h4>
