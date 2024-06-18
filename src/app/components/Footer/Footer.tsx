@@ -59,13 +59,6 @@ const iconLinks = [
     Icon: BsDiscord,
   },
 ];
-
-const textLinks = [
-  {
-    name: "Terms of Use",
-  },
-];
-
 interface FooterProps {}
 
 export const Footer: React.FC<FooterProps> = () => {
@@ -76,15 +69,13 @@ export const Footer: React.FC<FooterProps> = () => {
       <div className="w-24">
         <div className="divider my-1" />
       </div>
-      <div className="flex justify-center gap-8 p-2">
-        <div className="flex items-center justify-center text-sm">
-          <a
-            onClick={openTerms}
-            className="transition-colors hover:text-primary cursor-pointer"
-          >
-            Terms of Use
-          </a>
-        </div>
+      <div className="flex justify-center">
+        <button
+          onClick={openTerms}
+          className="transition-colors hover:text-primary cursor-pointer btn btn-link no-underline text-base-content"
+        >
+          Terms of Use
+        </button>
       </div>
       <div className="flex flex-wrap justify-center gap-8 p-4 pt-2 md:flex-row md:p-6 md:pt-2">
         {iconLinks.map(({ name, url, Icon }) => (
