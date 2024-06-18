@@ -20,7 +20,9 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
         </button>
       </div>
       <div className="terms-container flex flex-col gap-2">
-        <p>Last updated [27 May 2024]</p>
+        <p>
+          <i>Last updated [27 May 2024]</i>
+        </p>
         <p>
           <a
             href="https://btcstaking.testnet.babylonchain.io/"
@@ -28,9 +30,10 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
             rel="noopener noreferrer"
             className="text-primary hover:underline"
           >
-            https://btcstaking.testnet.babylonchain.io/
+            <i>https://btcstaking.testnet.babylonchain.io/</i>
           </a>{" "}
-          is a website-hosted user interface (the &quot;Interface&quot;).{" "}
+          is a website-hosted user interface (the &quot;
+          <strong>Interface</strong>&quot;).{" "}
           <a
             href="https://babylonchain.io/"
             target="_blank"
@@ -39,7 +42,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
           >
             BabylonChain.io
           </a>{" "}
-          is our website (&quot;Website&quot;).
+          is our website (&quot;<strong>Website</strong>&quot;).
         </p>
         <p>
           Please read these terms and conditions carefully before using the
@@ -66,10 +69,11 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
           <h3 className="section-title">Terms of use</h3>
           <p>
             These Terms of Use and any terms and conditions incorporated by
-            reference (collectively, the “Terms”) govern access to and the use
-            of the Interface by each individual, entity, group, or association
-            (collectively User, Users, You) who views, interacts, links to or
-            otherwise uses or derives any benefit from the Interface.
+            reference (collectively, the &quot;<strong>Terms</strong>&quot;)
+            govern access to and the use of the Interface by each individual,
+            entity, group, or association (collectively User, Users, You) who
+            views, interacts, links to or otherwise uses or derives any benefit
+            from the Interface.
           </p>
           <p>
             By accessing, browsing, or using the Interface or Website, or by
@@ -140,9 +144,9 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
             The Interface also offers interaction methods whereby the User can
             indicate a transaction that the User would like to perform in
             connection with the publicly available Babylon staking protocols
-            (the “Protocols”). The interaction methods include accessing the
-            functionalities of publicly deployed Protocol for Users to
-            self-authorize token transfers on relevant blockchains.
+            (the &quot;Protocols&quot;). The interaction methods include
+            accessing the functionalities of publicly deployed Protocol for
+            Users to self-authorize token transfers on relevant blockchains.
           </p>
 
           <h4>5. About the Protocol</h4>
@@ -186,8 +190,8 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
           <p>
             All draft transaction messages are delivered by the web Interface
             via an API to a compatible third-party wallet application or device
-            selected by the User after pressing the “Connect Wallet” (or
-            similar) button on the Interface.
+            selected by the User after pressing the &quot;Connect Wallet&quot;
+            (or similar) button on the Interface.
           </p>
           <p>
             The User must personally review and authorize all transaction
@@ -315,8 +319,8 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
             <li>
               engage, attempt, or assist in any hack of or attack on the
               Interface or any wallet application or device, including any
-              “sybil attack”, “DoS attack”, “griefing attack”, virus deployment,
-              or theft;
+              &quot;sybil attack&quot;, &quot;DoS attack&quot;, &quot;griefing
+              attack&quot;, virus deployment, or theft;
             </li>
             <li>
               commit any violation of applicable laws, rules or regulations in
@@ -533,18 +537,19 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
 
           <h4>11.4 No Warranty</h4>
           <p>
-            The Interface is provided on an “AS IS” and “AS AVAILABLE” basis.
-            You acknowledge and agree that your access and use of the Interface
-            are at your own risk. There is no representation or warranty that
-            access to the Interface will be continuous, uninterrupted, timely,
-            or secure; that the information contained in the Interface will be
-            accurate, reliable, complete, or current, or that the Interface will
-            be free from errors, defects, viruses, or other harmful elements. No
-            advice, information, or statement made in connection with the
-            Interface should be treated as creating any warranty concerning the
-            Interface. There is no endorsement, guarantee, or assumption of
-            responsibility for any advertisements, offers, or statements made by
-            third parties concerning the Interface.
+            The Interface is provided on an &quot;AS IS&quot; and &quot;AS
+            AVAILABLE&quot; basis. You acknowledge and agree that your access
+            and use of the Interface are at your own risk. There is no
+            representation or warranty that access to the Interface will be
+            continuous, uninterrupted, timely, or secure; that the information
+            contained in the Interface will be accurate, reliable, complete, or
+            current, or that the Interface will be free from errors, defects,
+            viruses, or other harmful elements. No advice, information, or
+            statement made in connection with the Interface should be treated as
+            creating any warranty concerning the Interface. There is no
+            endorsement, guarantee, or assumption of responsibility for any
+            advertisements, offers, or statements made by third parties
+            concerning the Interface.
           </p>
           <p>
             Further, there is no representations or warranty, from anyone, as to
@@ -693,10 +698,10 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
             are added to the blockchain, or other matters relating to the future
             operation of the protocol; or (ii) reorganizes or changes past
             blocks to alter the history of the blockchain. Some forks are
-            “contentious” and thus may result in two or more persistent
-            alternative versions of the protocol or blockchain, either of which
-            may be viewed as or claimed to be the legitimate or genuine
-            continuation of the original.
+            &quot;contentious&quot; and thus may result in two or more
+            persistent alternative versions of the protocol or blockchain,
+            either of which may be viewed as or claimed to be the legitimate or
+            genuine continuation of the original.
           </p>
           <p>
             Interface maintainers cannot anticipate, control or influence the
@@ -719,9 +724,9 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
             The Protocol and other relevant blockchain systems and smart
             contracts are public software utilities that are accessible directly
             through any compatible third-party node or indirectly through any
-            compatible third-party “wallet” application that interacts with such
-            a node. Interacting with the Protocol does not require the use of
-            the Interface, but the Interface is only a convenient and
+            compatible third-party &quot;wallet&quot; application that interacts
+            with such a node. Interacting with the Protocol does not require the
+            use of the Interface, but the Interface is only a convenient and
             user-friendly option of reading and displaying data from the
             Protocol and generating standard draft transaction messages
             compatible with the Protocol. The User may choose to interact with
