@@ -119,6 +119,16 @@ body.modal-open {
 .terms-container h4 {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-top: 1remrem;
+  margin-top: 1rem;
   margin-bottom: 0.5rem;
+}
+
+.terms-container ol {
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.terms-container li {
+  list-style-type: lower-alpha;
 }

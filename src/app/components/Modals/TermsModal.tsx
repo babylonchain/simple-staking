@@ -231,7 +231,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
         <div className="section">
           <h3 className="section-title">7. Eligibility</h3>
           <p>If you use the interface you represent and declare that you:</p>
-          <ul>
+          <ol>
             <li>
               are of legal age in the jurisdiction in which you reside to use
               the Interface and the Protocols, and you have legal capacity to
@@ -272,7 +272,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
               <strong>Restricted Territories</strong> or{" "}
               <strong>Sanctions List Persons</strong>;
             </li>
-          </ul>
+          </ol>
         </div>
 
         <div className="section">
@@ -295,7 +295,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
             Each User must not, directly or indirectly, in connection with their
             use of the Interface:
           </p>
-          <ul>
+          <ol>
             <li>use the Interface other than for the Permitted Use;</li>
             <li>
               use the Interface at any time when any representation of the User
@@ -375,7 +375,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
               engage in any activity that contributes to or facilitates any of
               the foregoing activities.
             </li>
-          </ul>
+          </ol>
         </div>
 
         <div className="section">
@@ -384,7 +384,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
             Additionally, if you use the interface you consent to, represent,
             and declare that you agree:
           </p>
-          <ul>
+          <ol>
             <li>
               that the only duties and obligations connected with the Interface
               owed to the User are set forth in these Terms;
@@ -463,7 +463,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({ open, onClose }) => {
               Interface or the Protocol and the Interface and Interface
               maintainers are not liable for such damages;
             </li>
-          </ul>
+          </ol>
         </div>
 
         <div className="section">
