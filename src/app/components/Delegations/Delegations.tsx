@@ -6,6 +6,7 @@ import { useLocalStorage } from "usehooks-ts";
 import { SignPsbtTransaction } from "@/app/common/utils/psbt";
 import { LoadingTableList } from "@/app/components/Loading/Loading";
 import { useError } from "@/app/context/Error/ErrorContext";
+import { useGlobalParams } from "@/app/context/api/GlobalParamsProvider";
 import { QueryMeta } from "@/app/types/api";
 import {
   Delegation as DelegationInterface,
@@ -15,6 +16,7 @@ import { ErrorState } from "@/app/types/errors";
 import { GlobalParamsVersion } from "@/app/types/globalParams";
 import { signUnbondingTx } from "@/utils/delegations/signUnbondingTx";
 import { signWithdrawalTx } from "@/utils/delegations/signWithdrawalTx";
+import { getCurrentGlobalParamsVersion } from "@/utils/globalParams";
 import { getIntermediateDelegationsLocalStorageKey } from "@/utils/local_storage/getIntermediateDelegationsLocalStorageKey";
 import { toLocalStorageIntermediateDelegation } from "@/utils/local_storage/toLocalStorageIntermediateDelegation";
 import { WalletProvider } from "@/utils/wallet/wallet_provider";
@@ -59,6 +61,7 @@ export const Delegations: React.FC<DelegationsProps> = ({
   const [txID, setTxID] = useState("");
   const [modalMode, setModalMode] = useState<MODE>();
   const { showError } = useError();
+  const globalParams = useGlobalParams();
 
   // Local storage state for intermediate delegations (withdrawing, unbonding)
   const intermediateDelegationsLocalStorageKey =
@@ -95,11 +98,26 @@ export const Delegations: React.FC<DelegationsProps> = ({
   // It constructs an unbonding transaction, creates a signature for it, and submits both to the back-end API
   const handleUnbond = async (id: string) => {
     try {
+      const stakingTx = delegationsAPI.find(
+        (delegation) => delegation.stakingTxHashHex === id,
+      )?.stakingTx;
+      if (!stakingTx) {
+        throw new Error("Staking transaction not found");
+      }
+      if (!globalParams || !globalParams.data) {
+        throw new Error("No global params available");
+      }
+      const { currentVersion: globalParamsWhenStaking } =
+        getCurrentGlobalParamsVersion(stakingTx.startHeight, globalParams.data);
+
+      if (!globalParamsWhenStaking) {
+        throw new Error("Current version not found");
+      }
       // Sign the unbonding transaction
       const { delegation } = await signUnbondingTx(
         id,
         delegationsAPI,
-        globalParamsVersion,
+        globalParamsWhenStaking,
         publicKeyNoCoord,
         btcWalletNetwork,
         signPsbtTx,
@@ -126,11 +144,26 @@ export const Delegations: React.FC<DelegationsProps> = ({
   // It constructs a withdrawal transaction, creates a signature for it, and submits it to the Bitcoin network
   const handleWithdraw = async (id: string) => {
     try {
+      const stakingTx = delegationsAPI.find(
+        (delegation) => delegation.stakingTxHashHex === id,
+      )?.stakingTx;
+      if (!stakingTx) {
+        throw new Error("Staking transaction not found");
+      }
+      if (!globalParams || !globalParams.data) {
+        throw new Error("No global params available");
+      }
+      const { currentVersion: globalParamsWhenStaking } =
+        getCurrentGlobalParamsVersion(stakingTx.startHeight, globalParams.data);
+
+      if (!globalParamsWhenStaking) {
+        throw new Error("Current version not found");
+      }
       // Sign the withdrawal transaction
       const { delegation } = await signWithdrawalTx(
         id,
         delegationsAPI,
-        globalParamsVersion,
+        globalParamsWhenStaking,
         publicKeyNoCoord,
         btcWalletNetwork,
         signPsbtTx,
