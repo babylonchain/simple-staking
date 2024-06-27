@@ -81,7 +81,7 @@ workflows:
               only: /.*/
             branches:
               only:
-                - dev-liam
+                - fix-temp-image
                 - main
       - push_docker:
           requires:
@@ -91,5 +91,5 @@ workflows:
               only: /.*/
             branches:
               only:
-                - dev-liam
+                - fix-temp-image
                 - main
