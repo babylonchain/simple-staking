@@ -81,7 +81,7 @@ workflows:
               only: /.*/
             branches:
               only:
-                - dev
+                - dev-liam
                 - main
       - push_docker:
           requires:
@@ -91,5 +91,5 @@ workflows:
               only: /.*/
             branches:
               only:
-                - dev
+                - dev-liam
                 - main
