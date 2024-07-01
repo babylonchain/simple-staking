@@ -6,7 +6,7 @@ import { txFeeSafetyCheck } from "@/utils/delegations/fee";
 const createMockTransaction = (byteLength: number) => {
   const tx = new Transaction();
   // Mock the byteLength method to return the specified length
-  tx.byteLength = () => byteLength;
+  tx.virtualSize = () => byteLength;
   return tx;
 };
 

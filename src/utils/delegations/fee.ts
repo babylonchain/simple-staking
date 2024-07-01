@@ -18,7 +18,7 @@ export const txFeeSafetyCheck = (
   feeRate: number,
   estimatedFee: number,
 ) => {
-  const txFee = tx.byteLength() * feeRate;
+  const txFee = tx.virtualSize() * feeRate;
   const lowerBound = txFee / FEE_TOLERANCE_COEFFICIENT;
   const upperBound = txFee * FEE_TOLERANCE_COEFFICIENT;
 
