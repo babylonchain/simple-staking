@@ -76,20 +76,6 @@ workflows:
     jobs:
       - build
       - build_docker:
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              only:
-                - dev
-                - main
       - push_docker:
           requires:
             - build_docker
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              only:
-                - dev
-                - main
