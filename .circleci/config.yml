@@ -75,7 +75,8 @@ workflows:
   CICD:
     jobs:
       - build
-      - build_docker:
+      - build_docker
       - push_docker:
           requires:
             - build_docker
+
