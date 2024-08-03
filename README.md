@@ -30,6 +30,14 @@ Then, to start a development server:
 npm run dev
 ```
 
+## Production build
+
+```bash
+docker build \
+  --build-arg CONFIG_FILE=.env.production.config \
+  -t babylonchain/simple-staking .
+```
+
 ## Wallet Integration
 
 Instructions for wallet integration can be found in this
